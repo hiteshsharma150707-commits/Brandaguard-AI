@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BrandGuard AI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== Top navigation (shared by all 3 pages) ===== -->
+  <header class="topbar">
+    <a class="brand" onclick="showView('home')"><div class="logo-mark">🛡️</div> BrandGuard AI</a>
+    <nav class="top-nav">
+      <button class="top-link active" data-view="home">Home</button>
+      <button class="top-link" data-view="app">Workspace</button>
+      <button class="top-link" data-view="about">About</button>
+    </nav>
+  </header>
+
+  <!-- ===== PAGE 1: HOME ===== -->
+  <div class="view show" id="home">
+    <section class="hero">
+      <div class="hero-text">
+        <span class="pill">✨ Human-supervised brand governance</span>
+        <h1>Check every message.<br><span class="grad">Protect every brand.</span></h1>
+        <p>BrandGuard AI checks your content against approved brand guidelines before it is published, explains every issue and sends it to a human reviewer for approval.</p>
+        <div class="row">
+          <button class="btn big" onclick="tryDemo()">Try Live Demo</button>
+          <button class="btn big ghost" onclick="showView('about')">About the Project</button>
+        </div>
+      </div>
+      <div class="mock card">
+        <div class="mock-head"><span class="dot r"></span><span class="dot o"></span><span class="dot g"></span> Content compliance review</div>
+        <p class="mock-text">"Our product comes with a <mark class="High">5-year</mark> warranty."</p>
+        <div class="issue High"><span class="badge High">High severity</span><strong>Factual Inconsistency</strong>
+          <p>Approved fact: <span class="fact">Product warranty is 2 years.</span></p>
+          <p>Suggested: <span class="sugg">"Our product comes with a 2-year warranty."</span></p></div>
+        <span class="badge Pending">Awaiting human review</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Everything you need to keep content on-brand</h2>
+      <p class="sub center">Simple tools for creators, brand managers and reviewers.</p>
+      <div class="grid3">
+        <div class="card"><div class="stat-icon i-purple">📖</div><h3>Brand Guidelines</h3><p>Store approved facts, tone, terminology and claims in one place.</p></div>
+        <div class="card"><div class="stat-icon i-blue">🔍</div><h3>Content Checker</h3><p>Paste text and instantly compare it with your approved rules.</p></div>
+        <div class="card"><div class="stat-icon i-orange">💡</div><h3>Explainable Issues</h3><p>See what was flagged, why, how severe it is and which rule applies.</p></div>
+        <div class="card"><div class="stat-icon i-green">✏️</div><h3>Smart Suggestions</h3><p>Apply a correction with one click, or keep your own wording.</p></div>
+        <div class="card"><div class="stat-icon i-purple">✅</div><h3>Human Approval</h3><p>A reviewer approves or requests changes. AI never publishes alone.</p></div>
+        <div class="card"><div class="stat-icon i-blue">📈</div><h3>Governance Insights</h3><p>Spot the mistakes that keep repeating across your team.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>How it works</h2>
+      <div class="steps">
+        <div class="step"><b>1</b><h3>Set rules</h3><p>Admin adds approved facts and guidelines.</p></div>
+        <div class="step"><b>2</b><h3>Submit</h3><p>Creator pastes content to check.</p></div>
+        <div class="step"><b>3</b><h3>Fix</h3><p>Review issues and apply suggestions.</p></div>
+        <div class="step"><b>4</b><h3>Approve</h3><p>Reviewer makes the final decision.</p></div>
+      </div>
+      <div class="cta"><h2>See it catch a wrong warranty in seconds</h2><button class="btn big light" onclick="tryDemo()">Open the Demo</button></div>
+    </section>
+    <footer class="foot">BrandGuard AI · Team BrandSentinels · College project demonstration</footer>
+  </div>
+
+  <!-- ===== PAGE 2: WORKSPACE (dashboard) ===== -->
+  <div class="view" id="app">
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar">
+    <div class="logo"><div class="logo-mark">🛡️</div> BrandGuard AI</div>
+    <nav>
+      <button class="nav-btn active" data-page="overview">📊 Overview</button>
+      <button class="nav-btn" data-page="guidelines">📖 Brand Guidelines</button>
+      <button class="nav-btn" data-page="checker">✍️ New Content Check</button>
+      <button class="nav-btn" data-page="queue">📥 Review Queue</button>
+      <button class="nav-btn" data-page="history">📈 History &amp; Analytics</button>
+    </nav>
+  </aside>
+
+  <main>
+    <!-- ===== 1. Overview / Dashboard ===== -->
+    <section class="page show" id="overview">
+      <h1>Overview</h1>
+      <p class="sub">Check every message. Protect every brand.</p>
+      <div class="grid">
+        <div class="card"><div class="stat-icon i-purple">🔍</div><div class="stat-num" id="sTotal">0</div><div class="stat-label">Total Checks</div></div>
+        <div class="card"><div class="stat-icon i-orange">⚠️</div><div class="stat-num" id="sIssues">0</div><div class="stat-label">Issues Detected</div></div>
+        <div class="card"><div class="stat-icon i-green">✅</div><div class="stat-num" id="sApproved">0</div><div class="stat-label">Approved Content</div></div>
+        <div class="card"><div class="stat-icon i-blue">⏳</div><div class="stat-num" id="sPending">0</div><div class="stat-label">Pending Review</div></div>
+      </div>
+      <div class="card">
+        <h3>How it works</h3>
+        <p>1. Paste your content &nbsp;→&nbsp; 2. BrandGuard AI compares it with approved brand rules &nbsp;→&nbsp; 3. Fix the issues with one click &nbsp;→&nbsp; 4. An authorised human reviewer approves it.</p>
+        <button class="btn" onclick="showPage('checker')">Start a new check</button>
+      </div>
+    </section>
+
+    <!-- ===== 2. Brand Guidelines ===== -->
+    <section class="page" id="guidelines">
+      <h1>Brand Guidelines</h1>
+      <p class="sub">Approved rules that every submission is checked against.</p>
+      <div id="ruleList"></div>
+    </section>
+
+    <!-- ===== 3. Content Checker ===== -->
+    <section class="page" id="checker">
+      <h1>New Content Check</h1>
+      <p class="sub">Paste your content and compare it with the approved brand rules.</p>
+      <div class="card">
+        <textarea id="content" placeholder="Type or paste your content here..."></textarea>
+        <div class="row">
+          <button class="btn" onclick="analyse()">Analyse Content</button>
+          <button class="btn ghost" onclick="loadExample()">Load Example</button>
+          <button class="btn ghost" onclick="clearAll()">Clear</button>
+        </div>
+      </div>
+      <div class="card" id="resultCard" style="display:none">
+        <h3 id="resultTitle"></h3>
+        <div class="preview" id="preview"></div>
+        <div id="issueList"></div>
+        <div class="row">
+          <button class="btn orange" id="applyAllBtn" onclick="applyAll()">Apply All Suggestions</button>
+          <button class="btn green" onclick="submitReview()">Submit for Human Review</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 4. Review Queue ===== -->
+    <section class="page" id="queue">
+      <h1>Review Queue</h1>
+      <p class="sub">An authorised reviewer makes the final decision. AI only assists.</p>
+      <div id="queueList"></div>
+    </section>
+
+    <!-- ===== 5. History & Analytics ===== -->
+    <section class="page" id="history">
+      <h1>History &amp; Analytics</h1>
+      <p class="sub">See which kinds of mistakes happen most often.</p>
+      <div class="card"><h3>Issues by type</h3><div id="bars"></div></div>
+      <div class="card"><h3>Submission history</h3><div style="overflow-x:auto"><table><thead><tr><th>#</th><th>Content</th><th>Issues</th><th>Status</th></tr></thead><tbody id="historyBody"></tbody></table></div></div>
+    </section>
+  </main>
+  </div>
+
+  <!-- ===== PAGE 3: ABOUT ===== -->
+  <div class="view" id="about">
+    <section class="section first">
+      <span class="pill">About the project</span>
+      <h1>The problem we solve</h1>
+      <p class="lead">Organisations publish content through employees, agencies and AI tools. This causes inconsistent tone, outdated facts, wrong terminology and unsupported claims, which confuse customers and reduce trust. BrandGuard AI is a central pre-publication check that compares content with approved guidelines and supports human approval.</p>
+      <div class="callout"><b>Core principle:</b> AI assists with detection and recommendations; an authorised person keeps control over approval and publication.</div>
+    </section>
+
+    <section class="section">
+      <h2>Who it helps</h2>
+      <div class="grid3">
+        <div class="card"><div class="stat-icon i-purple">🧑‍💻</div><h3>Creators</h3><p>Fast feedback and clear correction suggestions.</p></div>
+        <div class="card"><div class="stat-icon i-blue">📣</div><h3>Marketing teams</h3><p>Consistent messaging across campaigns.</p></div>
+        <div class="card"><div class="stat-icon i-orange">🎯</div><h3>Brand managers</h3><p>Central control of approved language and facts.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Technology</h2>
+      <div class="card"><div style="overflow-x:auto"><table>
+        <thead><tr><th>Layer</th><th>This demo</th><th>Full plan</th></tr></thead>
+        <tbody>
+          <tr><td>Frontend</td><td>HTML, CSS, JavaScript</td><td>React.js dashboard</td></tr>
+          <tr><td>Backend</td><td>Java (built-in HTTP server)</td><td>Python FastAPI</td></tr>
+          <tr><td>Checking</td><td>Rule-based (regular expressions)</td><td>LLM API plus rule engine</td></tr>
+          <tr><td>Storage</td><td>In-memory</td><td>PostgreSQL</td></tr>
+        </tbody></table></div></div>
+    </section>
+
+    <section class="section">
+      <h2>Roadmap</h2>
+      <div class="grid3">
+        <div class="card"><span class="badge Approved">Round 1</span><h3>The Plan</h3><p>Problem, users, MVP scope, architecture and proposal.</p></div>
+        <div class="card"><span class="badge Pending">Round 2</span><h3>The Build</h3><p>Dashboard, roles, rule setup, analysis, review queue, deployment.</p></div>
+        <div class="card"><span class="badge Changes">Round 3</span><h3>The Finish</h3><p>Better evidence, history, analytics, testing and final demo.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="card team"><div class="logo-mark big">HS</div>
+        <div><h3>Hitesh Sharma</h3><p>Team Leader, Team BrandSentinels<br>B.Tech CSE, Swami Vivekanand Institute of Engineering &amp; Technology (SVIET)</p></div></div>
+    </section>
+    <footer class="foot">BrandGuard AI · Team BrandSentinels · College project demonstration</footer>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+<script>
+// ---------- Small helpers ----------
+const $ = id => document.getElementById(id);
+const EXAMPLE = "Our product comes with a 5-year warranty.";
+let currentIssues = [];
+
+// Escape text so it is safe to show inside HTML
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+// Talk to the Java server using fetch + JSON
+async function api(url, data) {
+  const opts = data ? { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) } : {};
+  const res = await fetch(url, opts);
+  return res.json();
+}
+
+function toast(msg) {
+  const t = $('toast'); t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function statusClass(s) { return s === 'Approved' ? 'Approved' : s === 'Pending Review' ? 'Pending' : 'Changes'; }
+
+// ---------- Navigation ----------
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.toggle('show', p.id === name));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.page === name));
+  if (name === 'overview') loadStats();
+  if (name === 'guidelines') loadGuidelines();
+  if (name === 'queue') loadQueue();
+  if (name === 'history') loadHistory();
+}
+document.querySelectorAll('.nav-btn').forEach(b => b.onclick = () => showPage(b.dataset.page));
+
+// ---------- Dashboard ----------
+async function loadStats() {
+  const s = await api('/api/stats');
+  $('sTotal').textContent = s.total; $('sIssues').textContent = s.issues;
+  $('sApproved').textContent = s.approved; $('sPending').textContent = s.pending;
+}
+
+// ---------- Guidelines ----------
+async function loadGuidelines() {
+  const rules = await api('/api/guidelines');
+  $('ruleList').innerHTML = rules.map(r =>
+    `<div class="card rule"><div class="stat-icon i-purple">${r.icon}</div><div><h3>${esc(r.title)}</h3><p>${esc(r.text)}</p></div></div>`).join('');
+}
+
+// ---------- Content checker ----------
+function loadExample() { $('content').value = EXAMPLE; analyse(); }
+function clearAll() { $('content').value = ''; $('resultCard').style.display = 'none'; }
+
+async function analyse() {
+  const text = $('content').value;
+  if (!text.trim()) { toast('Please enter some content first.'); return; }
+  const data = await api('/api/analyse', { text });
+  currentIssues = data.issues;
+  renderResult(text);
+}
+
+// Show the text with highlighted problems, then one card per issue
+function renderResult(text) {
+  $('resultCard').style.display = 'block';
+  let html = '', pos = 0;
+  currentIssues.forEach(i => {
+    html += esc(text.slice(pos, i.start)) + `<mark class="${i.severity}">${esc(text.slice(i.start, i.end))}</mark>`;
+    pos = i.end;
+  });
+  $('preview').innerHTML = html + esc(text.slice(pos));
+  $('resultTitle').textContent = currentIssues.length ? `${currentIssues.length} issue(s) detected` : 'Check complete';
+  $('applyAllBtn').style.display = currentIssues.length ? '' : 'none';
+  $('issueList').innerHTML = currentIssues.length ? currentIssues.map((i, n) => `
+    <div class="issue ${i.severity}">
+      <span class="badge ${i.severity}">${i.severity} severity</span><strong>${esc(i.type)}</strong>
+      <p><b>Why:</b> ${esc(i.message)}</p>
+      <p><b>Approved rule:</b> <span class="fact">${esc(i.approved)}</span></p>
+      <p><b>Suggested edit:</b> change "${esc(i.matched)}" to <span class="sugg">"${esc(i.suggestion)}"</span></p>
+      <button class="btn small" onclick="applyOne(${n})">Apply suggestion</button>
+    </div>`).join('') : '<div class="good">✅ No brand issues found. This content matches the approved rules.</div>';
+}
+
+// Replace the flagged text with the suggestion, then check again
+function applyOne(n) {
+  const i = currentIssues[n], t = $('content').value;
+  $('content').value = t.slice(0, i.start) + i.suggestion + t.slice(i.end);
+  analyse(); toast('Suggestion applied');
+}
+function applyAll() {
+  let t = $('content').value;
+  [...currentIssues].reverse().forEach(i => { t = t.slice(0, i.start) + i.suggestion + t.slice(i.end); }); // last to first keeps positions valid
+  $('content').value = t; analyse(); toast('All suggestions applied');
+}
+
+async function submitReview() {
+  await api('/api/submit', { text: $('content').value });
+  toast('Submitted for human review'); showPage('queue');
+}
+
+// ---------- Review queue ----------
+async function loadQueue() {
+  const items = await api('/api/queue');
+  $('queueList').innerHTML = items.length ? items.map(s => `
+    <div class="card q">
+      <div class="top"><h3>Submission #${s.id}</h3><span class="badge ${statusClass(s.status)}">${esc(s.status)}</span></div>
+      <blockquote>${esc(s.text)}</blockquote>
+      <div>${s.issues.length ? s.issues.map(i => `<span class="chip">${esc(i.type)}: ${esc(i.matched)}</span>`).join('') : '<span class="chip">No issues detected</span>'}</div>
+      <div class="row">
+        <button class="btn green small" onclick="decide(${s.id}, 'Approved')">Approve</button>
+        <button class="btn orange small" onclick="decide(${s.id}, 'Changes Requested')">Request Changes</button>
+      </div>
+    </div>`).join('') : '<div class="card empty">The queue is empty.</div>';
+}
+async function decide(id, status) { await api('/api/review', { id, status }); toast(status); loadQueue(); }
+
+// ---------- History & analytics ----------
+async function loadHistory() {
+  const [stats, items] = await Promise.all([api('/api/stats'), api('/api/queue')]);
+  const max = Math.max(1, ...Object.values(stats.byType));
+  $('bars').innerHTML = Object.entries(stats.byType).map(([k, v]) =>
+    `<div class="bar-row"><span>${esc(k)}</span><div class="bar"><span style="width:${v / max * 100}%"></span></div><b>${v}</b></div>`).join('');
+  $('historyBody').innerHTML = items.map(s =>
+    `<tr><td>${s.id}</td><td>${esc(s.text)}</td><td>${s.issues.length}</td><td><span class="badge ${statusClass(s.status)}">${esc(s.status)}</span></td></tr>`).join('');
+}
+
+// ---------- Switching between the 3 pages ----------
+function showView(name) {
+  document.querySelectorAll('.view').forEach(v => v.classList.toggle('show', v.id === name));
+  document.querySelectorAll('.top-link').forEach(b => b.classList.toggle('active', b.dataset.view === name));
+  window.scrollTo(0, 0);
+  if (name === 'app') showPage('overview');
+}
+document.querySelectorAll('.top-link').forEach(b => b.onclick = () => showView(b.dataset.view));
+function tryDemo() { showView('app'); showPage('checker'); loadExample(); }
+</script>
+</body>
+</html>
